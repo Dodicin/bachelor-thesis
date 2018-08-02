@@ -1,2 +1,67 @@
 {
+    "latex-workshop.message.update.show": false,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "window.zoomLevel": 1,
+    "latex-workshop.latex.clean.enabled": true,
+    "latex-workshop.latex.clean.fileTypes": [
+      "./*/*.aux",
+      "*.bcf",
+      "*.xml",
+      "*.synctex.gz",
+      "*.aux",
+      "*.bbl",
+      "*.blg",
+      "*.idx",
+      "*.ind",
+      "*.lof",
+      "*.lot",
+      "*.out",
+      "*.toc",
+      "*.acn",
+      "*.acr",
+      "*.alg",
+      "*.glg",
+      "*.glo",
+      "*.gls",
+      "*.ist",
+      "*.fls",
+      "*.log",
+      "*.fdb_latexmk"
+    ],
+    "git.enableSmartCommit": true
+    /*"latex-workshop.latex.outputDir": "./build/",
+    "latex-workshop.latex.tools": [
+        {
+          "name": "latexmk",
+          "command": "latexmk",
+          "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-pdf",
+            //"-aux-directory=build",
+            //"-output-directory=build",
+            "%DOC%"
+          ]
+        },
+        {
+          "name": "pdflatex",
+          "command": "pdflatex",
+          "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            //"-output-directory=build",
+            //"-aux-directory=build",
+            "-file-line-error",
+            "%DOC%"
+          ]
+        },
+        {
+          "name": "bibtex",
+          "command": "bibtex",
+          "args": [
+            "%DOCFILE%"
+          ]
+        }
+      ],*/
 }

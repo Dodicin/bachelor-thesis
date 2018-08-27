@@ -5,18 +5,28 @@
 \usepackage[utf8]{inputenc}
 \usepackage{setspace}
 \usepackage[paper=a4paper,margin=1in]{geometry}
-\usepackage[backend=biber]{biblatex}
+\usepackage[backend=biber,citestyle=authortitle-comp]{biblatex}
 \usepackage{fancyhdr}
 \usepackage{titling}
+\usepackage{tcolorbox}
+\usepackage{morefloats}
 
+% Floating box color
+\definecolor{boxcolor}{RGB}{173, 216, 230}
+
+% Bibliography resource
+\addbibresource{bibliography.bib}
+
+% Page header
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[LE]{\leftmark}
 \fancyhead[RO]{\rightmark}
 
-
+% Images path
 \graphicspath{{images/}}
 
+% Thesis data
 \author{Nassim Habbash}
 \title{Distributed Ledger Technology: \\
 analysis and design of a DLT solution \\
@@ -25,6 +35,8 @@ for a credits interchange sysstem}
 \newcommand*{\cosupervisor}{Dott. Riccardo Mazzei}
 \newcommand*{\immatricolation}{Matricola 808292}
 \newcommand*{\academicyear}{Anno Accademico 2017-2018}
+
+% Doc 
 \begin{document}
     \frontmatter
     \include{titlepage}
@@ -36,4 +48,8 @@ for a credits interchange sysstem}
     \include{chapters/00-introduction}
 
     \backmatter
+
+    \section{References} 
+    \label{sec:references}
+    \printbibliography
 \end{document}

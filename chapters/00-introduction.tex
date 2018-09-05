@@ -62,9 +62,9 @@ DLs can be designed in a number of ways pertaining to main idea behind them and 
 There usually are four core attributes of DLTs, these are:
 \begin{enumerate}
     \item The distributed nature of the ledger
-    \item The consensus mechanism
     \item The cryptographic mechanisms
-    \item The network entry permission level
+    \item The consensus mechanism
+    \item The network access permission level
 \end{enumerate}
 
 These three elements play are fundamental in ensuring the DLs ability to store and exchange data across different, self-interested parties, without the need for a central record-keeper, without the need for trust amongst the concerned parties, as it is guaranteed by the system itself, and while assuring that no double-spending takes place.
@@ -79,9 +79,25 @@ This distributed nature of DLs allows the removal of a trusted central party, in
 
 Security risks aren't completely solved: the software layer built over the DL can become additional attack surfaces.
 
+\subsection{Cryptographic mechanisms}
+
+Cryptography is at the core of the DLT. Asymmetric cryptography plays an important role by identifying and authenticating partecipants, confirming data entries and facilitating ledger updates.
+Each data entry is hashed, producing the so-called digest, which looks random and unrelated to the original input, but is in fact deterministic, meaning that from one original input there's only one hash possible. The data is hence hidden to anyone that is not intended to look at the data. Digital signatures, which are a common and robust method used in a wide array of application are used as a means of authentication. Each network partecipat has a private key, that is used for signing digital messages and only known to the key proprietary, and a public key, which is public knowledge and used for validating the identity of the sender of the original message.
+Partecipants proposing changes will authenticate themselves using digital signatures, and the validators will use cryptographic tools to verify whether the partecipant has the proper credentials, and so on. The validators can be either a counterpart, a third party, or the whole network depending on the type of DL and operation the change refers to.
+
+In the blockchain subset of DLs in particular, encryption plays a fundamental role, as they're essential in the chain encryption mechanism between the blocks that make up the blockchain itself.
+
+
 \subsection{Consensus mechanism}
 \label{sec:consensus}
-The purpose of the consensus mechanism is to verify that the information being added to the DL is legitimate. It is also important to handle conflicts between multiple simultaneous competing entries (ie double spending). There exist many different consensus algorithms or mechanisms, depending on the need and idea behind them, each has their advantages and disadvantages. \\
+The purpose of the consensus mechanism is to verify that the information being added to the DL is legitimate. It is fundamental in handling conflicts between multiple simultaneous competing entries (ie double spending), or take-overs by bad actors in the network. It's a derivative property of the distributed nature of the ledger, and it requires partecipants in the network to reach a consensus over the information being added. There exist many different consensus algorithms and mechanisms, with different purposes, advantages and disadvantages. \\
+
+Consensus usually involves two steps:
+\begin{enumerate}
+    \item Validation, where each validator involved identifies that the state change is consistent according to the rules of the ledger. This operation may rely on records of previous states or a last agreed state.
+    \item Agreement, where each validator agrees to the state changes to the ledger. This step involves the mechanisms to resolve eventual conflicts and ensuring that valid changes are made only once, thus ensuring that the whole network is synchronized.
+\end{enumerate}
+
 
 The Bitcoin blockchain uses Proof-of-Work (PoF) to enstablish consensus. To add a new block to the blockchain, a node has to provide a proof of work. This is a computationally taxing problem, but easy to verify, and is solved by brute-forcing cyptographic hashing algorithms until the correct string that satisfies certain conditions is generated. This process is called "mining". Each miner that produces a valid PoF is then rewarded Bitcoins, which serves as an economic incentive to maintain system integrity. \\
 
@@ -98,19 +114,37 @@ Thus PoS systems are well suited to platforms where there is a static coin suppl
 
 The Corda distributed ledger, utilizes a unique "pluggable" consensus service, due to its peculiar distributed ledger architecture. It divides consensus in two types, validity consensus and uniqueness consensus. Given a proposed transaction, the first type of consensus checks whether the two parties satisfy a set of validity conditions, going back through all the parties' transaction histories, while the latter has the purpose to avoid double spend, and the consensus is provided by a Corda network service called "Notary", by attesting that, for a given transaction, there hasn't been proposed another competing one.\\
 
-\subsection{Cryptographic mechanisms}
 
-Cryptography is at the core of the DLT. Each data entry is hashed, producing the so-called digest, which looks random and unrelated to the original input, but is in fact deterministic, meaning that from one original input there's only one hash possible. The data is hence hidden to anyone that is not intended to look at the data. Most DLTs use asymmetric cryptography for digital signatures, which is a common and robust method used in a wide array of application. Each network partecipat has a private key, that is used for signing digital messages and only known to the key proprietary, and a public key, which is public knowledge and used for validating the identity of the sender of the original message.
-
-In the blockchain subset of DLs in particular, encryption plays a fundamental role, as they're essential in the chain encryption mechanism between the blocks that make up the blockchain itself.
-
-\subsection{Network entry permission level}
+\subsection{Network access permission level}
 
 The partecipation in the DL network can be open (permissionless) or permissioned. Bitcoin and Ethereum are the most prominent examples of completely permissionless blockchain, where partecipants can join or leave the network at will. This plays as one of their strengths, as a large, open permissionless system with a large number of nodes incentivized to validate new changes to the ledger and accurately and enstablishing a consensus is directly related to its network security (\ref{sec:consensus}).
 
-In permissioned DLs its members are pre-selected by somone - an owner, or a network service - who controls network access and sets the rule of the ledger. 
+In permissioned DLs its members are pre-selected by somone - an owner, or a network service - who controls network access and sets the rule of the ledger. The regulations of network access usually permits the use of a non-computationally expensive consensus mechanism, as there is no requirements for any trust between partecipants. This, however, means there's now a centralized trust entity playing a coordinating role and bearing the responsability over the trusting mechanism. 
+In permissioned DLs it's possible to have different degrees of transparency over the ledger, and faster transaction processing (thanks to the lighter consensus algorithm) allows for higher transaction volumes.
 
+The identity verification needed for the access solves some problems with governments and regulators with concerns about the identity verification and legal ownerships clarifications. \\
 
-% This solves problems with governments and regulators with concerns blabla about the identity verifications legal ownerships but disadvantage there's now a centralized trust entity playing a coordinating role (but after the entry everything is normal)
+Permissionless DLs have open access to the network, so anyone can join and leave as they wish. There's no central owner or administrator, the ledger is wholly transparent and the security is enstablished by having a large scale network. It is required to have a complex consensus algorithm to guarantee the integrity of the information, and there are some legal concern over lack of ownership, as no legal entity owns or controls the ledger.
 
-%Permissioned DLs do not typically require difficult “proofs of work” as a consensus mechanism for verifying transactions because network participantsare pre-selected and trusted
+Some industry players make distinctions between public/private, in term of access, and permissioned/permissionless, in term of roles in the network. For example, Ripple, has a permissioned ledger, but the data is validated by all partecipants, therefore being a public, permissioned ledger. Corda, on the other hand, has a permissioned ledger, but the data is validated only by a set of partecipants (those which the data concerns), hence being a private, permissioned ledger.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{permissioned-permissionless-taxonomy.png}
+    \caption{
+        Network Access Ledger Taxonomy, \cite{ukgovdltpaper}. 
+        }
+\end{figure}
+
+\subsection{Roles}
+Nodes in the network may play a variety of roles, depending on the partecipants intentions or technical arrangement of the DL. The Committee on Payment and Market Infrastructures of the Bank for Internation Settlements proposed a generalized framework, with the following different, non-exclusive roles for a node:
+
+\begin{enumerate}
+    \item System Administrator: node controlling access to the system and provides dispute resolution and notary services. This role is not required in permissionless DLs.
+    \item Asset Issuer: node enabled to issue assets. In the Bitcoin blockchain, there's no entity playing this role as the system creates assets (Bitcoins) by itself, according to its rules.
+    \item Proposer: node enabled to propose ledger updates.
+    \item Auditor: node enabled to view the ledger, but not to make updates. Can be used by regulators or supervisors.
+    \item Validator: node enabled to validate requests for addition of transactions in the ledger. This role is performed by the consensus mechanism in permissionless DLs.
+\end{enumerate}
+
+\subsection{Process flow}

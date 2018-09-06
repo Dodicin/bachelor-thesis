@@ -1,4 +1,6 @@
 \chapter{Introduction}
+\label{chap:Introduction}
+
 
 \section{Emergence of the Distributed Ledger model}
 
@@ -49,7 +51,8 @@ As of 2018, the DLTs impact in the financial sector seems still circumvented. Ac
         
         New additions are initiated by one of the nodes that creates a new block of data, containing the encrypted transactions. Information about the block is then shared on the network, and all partecipants collectively try to determine the block's validity according to a pre-defined alghoritmic validation method (consensus). After the validation, all the partecipant can add the block to their copy of the ledger. With this mechanism, every change to the ledger is replicated across the entire network, and each node has a full, identical copy of the entire ledger at any point in time. As the chain grows and new blocks are added, earlier blocks cannot be altered. \\
 
-        The cryptocurrency aspect is what has made Bitcoin garn the most fame. The consensus process involves the generation of a reward to the node that validated the last block of the blockchain, that being the currency in itself.
+        The cryptocurrency aspect is what has made Bitcoin garn the most fame. Bitcoin was designed specifically for creating a digital currency free of government control, while also anonymizing the identity of the partecipants.
+        The consensus process involves the generation of a reward to the node that validated the last block of the blockchain, that being the currency in itself. 
     \end{tcolorbox}
 \end{figure}
 \newpage
@@ -99,7 +102,7 @@ Consensus usually involves two steps:
 \end{enumerate}
 
 
-The Bitcoin blockchain uses Proof-of-Work (PoF) to enstablish consensus. To add a new block to the blockchain, a node has to provide a proof of work. This is a computationally taxing problem, but easy to verify, and is solved by brute-forcing cyptographic hashing algorithms until the correct string that satisfies certain conditions is generated. This process is called "mining". Each miner that produces a valid PoF is then rewarded Bitcoins, which serves as an economic incentive to maintain system integrity. \\
+The Bitcoin blockchain uses Proof-of-Work (PoF) to enstablish consensus. To add a new block to the blockchain, a node has to provide a proof of work. This is a computationally taxing problem, but easy to verify, and is solved by brute-forcing cyptographic hashing algorithms until the correct string that satisfies certain conditions is generated. This process is called "mining". Each miner that produces a valid PoF is then rewarded Bitcoins, which serves as an economic incentive to maintain system integrity.\\
 
 The Ethereum blockchain uses Proof-of-Stake (PoF). Its process is quite different from the PoF of Bitcoin, as there's no mathematical problem to solve, but instead, the creator of the new block is chosen in a deterministic way based on their stake, that is, how many coins or tokens they possess. 
 A key advantage to this approach is the energy efficiency. The Bitcoin network, for example, requires an annual energy consumption comparable to that of Columbia (56.6 TWh annually). 
@@ -147,4 +150,9 @@ Nodes in the network may play a variety of roles, depending on the partecipants 
     \item Validator: node enabled to validate requests for addition of transactions in the ledger. This role is performed by the consensus mechanism in permissionless DLs.
 \end{enumerate}
 
-\subsection{Process flow}
+
+\begin{figure}[h]
+    \begin{tcolorbox}[colframe=boxcolor]
+        \section*{What are smart contracts?}
+    \end{tcolorbox}
+\end{figure}

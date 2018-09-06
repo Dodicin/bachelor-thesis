@@ -10,6 +10,10 @@
 \usepackage{titling}
 \usepackage{tcolorbox}
 \usepackage{morefloats}
+\usepackage{nameref}
+
+% Capitalization of labels
+\newcommand{\setfont}[1]{\fontfamily{iwona}\selectfont \scshape #1}
 
 % Floating box color
 \definecolor{boxcolor}{RGB}{173, 216, 230}
@@ -29,8 +33,7 @@
 % Thesis data
 \author{Nassim Habbash}
 \title{Distributed Ledger Technology: \\
-analysis and design of a DLT solution \\
-for a credits interchange sysstem}
+analysis of the technology and design of a prototypical solution}
 \newcommand*{\supervisor}{Prof. Claudio Zandron}
 \newcommand*{\cosupervisor}{Dott. Riccardo Mazzei}
 \newcommand*{\immatricolation}{Matricola 808292}
@@ -46,7 +49,7 @@ for a credits interchange sysstem}
     \tableofcontents
     \mainmatter
     \include{chapters/00-introduction}
-
+    \include{chapters/01-business-analysis}
     \backmatter
 
     %\section{References} 

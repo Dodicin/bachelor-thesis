@@ -2,7 +2,7 @@
 
 Meal vouchers are redeemable tickets given by an employer to its employee as a form of benefit. Vouchers have a fixed value, cannot have change and have to be spent in their entirety, thus making payments problematic when cost and voucher value do not match. 
 
-The purpose of this software (ExChange) is to provide a platform for payments in which vouchers are a form of credit that can be used to seamlessly execute transactions between parties. The platform can tokenize fixed values credits such as vouchers or pool credits from multiple buyers to solve the issue of fixed values credits and change. (Forse conviene lasciare il resto in surplus dai ticket -> debito rimanente da un party?)
+The purpose of this software (ExChange) is to provide a platform for payments in which vouchers are a form of credit that can be used to seamlessly execute transactions between parties. The platform can tokenize (rivedere termine) fixed values credits such as vouchers or pool credits from multiple buyers to solve the issue of fixed values credits and change. (Forse conviene lasciare il resto in surplus dai ticket -> debito rimanente da un party?)
 
 The sections here presented describe the necessary requirements to fullfill the functional requirements of the system previously mentioned, in the form of simplified diagrams according to agile methodologies.
 
@@ -17,7 +17,7 @@ The sections here presented describe the necessary requirements to fullfill the 
 ### List of use cases:
 
 * Generic user use cases:
-    * Charging credits
+    * credit (Issue credits (Voucher originator))
     * Buying a good
     * Selling a good
 * Company use cases:

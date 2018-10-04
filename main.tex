@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern,textcomp}
 \usepackage{setspace}
 \usepackage[paper=a4paper,margin=1in]{geometry}
 \usepackage[backend=biber,citestyle=authortitle-comp]{biblatex}
@@ -11,6 +12,10 @@
 \usepackage{tcolorbox}
 \usepackage{morefloats}
 \usepackage{nameref}
+\usepackage[parfill]{parskip}
+\usepackage[export]{adjustbox}
+\usepackage{listings}
+\usepackage{pmboxdraw}
 
 % Capitalization of labels
 \newcommand{\setfont}[1]{\fontfamily{iwona}\selectfont \scshape #1}
@@ -53,6 +58,9 @@ and design of prototypical solution}
     \include{chapters/00-introduction}
     \include{chapters/01-business-analysis}
     \include{chapters/02-comparative-analysis}
+    \include{chapters/03-corda-analysis}
+    \include{chapters/04-prototype-design-implementation}
+    \include{chapters/05-conclusions}
     \backmatter
 
     %\section{References} 

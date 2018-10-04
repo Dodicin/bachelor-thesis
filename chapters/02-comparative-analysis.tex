@@ -1,16 +1,97 @@
 \chapter{Comparative Analysis}
 \label{chap:comparative-analysis}
 
+The adoption and popularization of DLT has created many new platforms that offer the possibility of building a distributed application.
+This creates a peculiar situation in which developers and companies need to decide which platform to choose to develop their applications, with or without any kind of experience in the field.
+
+Moreover, as these platform's architecture can wildly vary between one and another, it seems to be the case that the industry misses at the moment a clear separation between platforms use cases and more importantly material regarding usability - and how such platforms have been employed and why. This is to be expected, as the industry is experiencing rapid growth and evolution, and no standardization and regulamentation has been put into place yet.
+
 This chapter aims to analyze three major DLTs: Ethereum, Corda and Hyperledger. It will provide an overview of each DLT, and then dive into a comparison between the technical aspects of each, in order to showcase the major differences among them.
 
-\section{Ethereum overview}
+\section{Ethereum}
 
-Ethereum has one of the biggest following among users and developers, with more than a thousand applications already built on top of the blockchain. It was developed as a permissionless public blockchain, where anyone can build application or write smart contracts using its own programming language, Solidity. Ethereum's development team's goal was to provide a generic toolbox for providing support to a wide range of decentralized applications, with a particular emphasis on situations where rapid development time, security and of different applications to efficiently interact are important. \\
+Ethereum has one of the biggest following among users and developers, with more than a thousand applications already built on top of the blockchain. It was developed as a permissionless public blockchain where anyone can build application or write smart contracts using its own programming language, Solidity. Ethereum's development team's goal was to provide a generic toolbox for providing support to a wide range of decentralized applications, with a particular emphasis on situations where rapid development time, security and of different applications to efficiently interact are important.
+
+\subsection{Architecture overview}
+
+Ethereum is a decentralized blockchain platform for building "unstoppable applications", while Ether is the cryptocurrency used in the platform.
+
+Ethereum is an open, permissionless blockchain, hence any developer has free access to the platform to build distributed application, using the built-in programming language. These applications are called Dapps. End users interact with the blockchain through these Dapps, with miners creating blocks in which user's transactions are hashed and stored. 
 
 The structure of the Ethereum blockchain is very similar to Bitcoin's. Every node on the network stores a copy of the entire transaction history. With Ethereum, every node also stores the most recent state of each smart contract, in addition to all the transactions. 
 
+There's no centralized control in Ethereum: node operators decide which software their nodes run, miner operatores decide how to mine - solo or in a pool. 
 
-\section{R3 Corda overview}
+Consensus in the blockchain still uses Proof-of-Work, but the upcoming Casper implementation will introduce Proof-of-Stake, which works similarily to PoW, but as explained in \ref{chap:introduction}, the partecipants in the consensus process are limited to parties which have a real stake in the blockchain, removing the more taxing computation of the hash function with just a digital signature that proves the ownership of the stake in the system.
+
+Ethereum, being a public blockchain, can experience scalability issues. The change to a PoS algorithm might benefit the platform in this regard, but its real effects are still to be explored.
+
+Smart contracts in Ethereum are akin as "autonomous agents", as \cite{ethereumwhitepaper} puts it. They're programs stored and created in the blockchain that execute only when specific criteria are met, and are immutable, once deployed they can't be changed. The code consists in a seres of operations that runs until it reaches the end, an error, or one of the conditions is violated.
+
+Ethereum has the concept of "gas". Gas is the execution fee for the execution of a contract, and usually maps to one step of its computation. Its price is expressed in ether, which represent Ethereum's internal currency. Gas is hence the amount of ether a sender is willing to spend on every unit of gas.
+
+\subsection{Use case}
+
+Ethereum itself is commonly used as a digital currency or digital asset to store and transfer ethers between accounts. Its most common type of application is custom token systems. 
+
+\section{R3 Corda}
+
 Corda is a DLT backed by R3, a consortium made up of many big financial institution. It was developed as a global ledger, with its main goal is to provide an architecture to enable frictionless, well-regulated, reliable and private agreements between parties. Corda was developed specifically on financial use-cases, its main field of application being the financial services industry.
 
-\section{Hyperledger Fabric overview}
+Corda's main goal is to create a global logic ledger, that is, evolving from authoritative systems of records centrally maintained within institutions to a global distribuited authoritative system of records shared between firms, in which all the economic actors will interact in a secure, consistent and private manner.
+
+This has been implemented including the three major visions - as expressed in the \cite{cordawhitepaper}: records managed by the system have to be accessible only on a need-to-know basis by only actors involved in the records; agreements managed by the system and described by their corrispettive contracts gain legitimacy from its over-arching legal prose, which is a mechanism to regulamentate transactions; and to gain adoption across the financial community, portions of the system must be open source and up to industry standards.
+
+\subsection{Architecture overview}
+
+Corda is a private, permissioned distributed ledger. To ensure consistency in a global system where not all data is visible to everyone, Corda relies heavily on secured cryptographic hashes to identify parties and data. 
+
+The core concept model of Corda is built by state objects, representing agreements between two or more parties governed by smart contracts, transactions and flows, which are automatized transaction sequences which enable parties to coordinate actions without a central controller.
+
+A Corda distributed ledger is formed by the union of nodes participating in a Corda network. It differs greatly from a blockchain structure, as the data stored in the distributed ledger isn't accessible to anyone but the interested parties. 
+
+All nodes participating in the network require their identity to be verified. This passage is guaranteed by the "doorman", which is a node regulating entry in the network.
+
+In Corda there are two types of consensus: validity consensus and uniqueness consensus, as noted in \ref{sec:consensus}. This type of consensus service means that the guarantor of the consistency of the data isn't the whole architecture itself, but the notary service. This means also that these services are not required to see the full contents of any transaction, significantly improving privacy and scalability of the system compared to other blockchain designs which employ the whole architecture to guarantee consistency.
+
+In Corda there smart contracts are agreements between two parties under the form of programs. These smart contracts and their associated legal prose link business logic and business data, and ensure that financial agreements on the platform are rooted firmly in law and can be enforced in the event of ambiguity.
+
+Distributed applications in Corda are called CorDapps.
+
+\subsection{Use case}
+
+Corda's use case is fundamentally rooted in finance. Use cases include automate auditing of records, payments applications and financial trading applications.
+
+\section{Hyperledger Fabric}
+
+Hyperledger Fabric is a blockchain framework developed by the Linux Foundation. It was intended for developing solutions with a modular architecture, as hyperledger allows components to be plug-and-play. As stated on Hyperledger's website: “Hyperledger is an open source collaborative effort created to advance cross-industry blockchain technologies. It is a global collaboration, hosted by The Linux Foundation, including leaders in finance, banking, Internet of Things, supply chains, manufacturing, and Technology.".
+Hyperledger's project tries to incubate different busines blockchain technologies and frameworks under what it calls its "Umbrella strategy". Its intended use is that of a generic DLT framwork to enable many different kinds of solutions, not only limited to finance.
+
+\subsection{Architecture overview}
+
+Fabric's blockchain is a private permissioned distributed ledger consisting of many nodes running programs called chaincodes. Chaincodes are Fabric's version of smart contracts, and are the central element as transaction themselves are invoked by chaincodes. Participating in the network are also special validating and non-validating nodes, which are run by white listed organisations and transactors. 
+
+Fabric permissioned network entry is due to its need to guarantee privacy of the operation for participants in the network. This does not exclude the possibility of identification and point-to-point audit done by regulators. Within Hyperledger, content confidentiality is achieved by encrypting the transactions such that only the stakeholders can decrypt and execute them.
+
+Consensus in Hyperledger is pluggable, like Corda, allowing user to select which implementation or algorithm to use during deployment. 
+
+As Fabric is permissioned, it has higher scalability than permissionless distributed ledgers.
+
+\subsection{Use case}
+
+Fabric's use case is broad, as it provides a way to store confidential data that is required for any supply chain. Its use can range from supply chain logistics to trade and financial, or just secure data storing.
+
+\section{Comparison}
+
+From their respective white papers and documentations it becomes obvious that each of these platforms have very different visions and applications in mind.
+Corda is driven by concrete use cases from the financial services industry, in contrast, Fabric intends to provide an extendable architecture that can be employed in various different industries. Ethereum also present itself as independant from any specific field of application, but in contrast to Fabric, it's architecture provides a generic platform for transactions, rather than a modular platform for securing data.
+
+It is possible to place these platform on a circular spectrum. On one end, there are Fabric and relatively close, Fabric, which provide a highly flexible and generic platform. However, Ethereum's permissionless nature makes the issues of scalability, cost of performance and privacy arise for use cases that actually demand it. Fabric addresses performance scalability and privacy by its permissioned mode of operation and encryption.
+On the other side of the spectrum there's Corda. It has been consciously designed as a DLT for the financial services industries, taking the highly regulated environment into account.
+This use case focus provides an architectural design much simpler than Fabric and Ethereum at the cost of flexibility.
+
+\section{Considerations}
+Cost-resource considerations have been made in regards to which technology adopt for the project, and Corda has been chosen as the technology to use for the development of the prototype for this project work. 
+This is due to its simpler architectural design, which would require a definitely shorter amount of resources - time, developers - to understand compared to its competitors, and to the focus on financial use cases, which the underlying project this project work takes place in is set up.
+
+The issues of scalability and privacy have also been taken in consideration, thus ruling out a public, permissionless environment.

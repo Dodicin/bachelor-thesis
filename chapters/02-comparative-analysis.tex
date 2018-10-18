@@ -98,9 +98,46 @@ This use case focus provides an architectural design much simpler than Fabric an
 The only DLT featuring a cryptocurrency between the three is Ethereum, which uses Ether. Ether is emplyed to pay rewards for nodes that reach consensus. As Fabric and Corda do not reach consensus via mining, they do not need to feature a cryptocurrency in their systems.
 
 
+The architectures between the three platforms are quite different,hence the comparison will be driven along one shared axis that can highlight each platform's strength and weakness: how data is managed within the system. 
 
-\section{Considerations}
+\subsection{Data comparison}
+
+\subsubsection{Data coordination}
+
+Public blockchain do not have anywhere near the same throughput and data processing capabilities as private distributed ledgers. The same holds true for \textbf{Ethereum}, so a comparison on those factors would be certainly be heavily in favor of Corda's or Fabric's distributed ledgers.
+Still, Ethereum features a wide range of forks which maintain the same core architecture, but make key changes to increase throughput and processing capabilities, like Quorum. Of note is the change from Proof-of-Work to Proof-of-Stake that is going to be implemented in the Casper version of Ethereum, which will substatially increase throughput via a lighter consensus mechanism.\\
+
+\textbf{Corda}'s architecture relies on a nodal structure and submodules called notaries to help maintain the validity of the network. Each node has a relational database, and their union makes up the distributed storage platform. The data is only accessible by individual parties directly concerned in the transaction, so the actual global distributed ledger isn't accessible by anyone. Coordination of data is carried out through flows, which are programmable and predefined functions that allow communication between nodes. Additionaly, Corda features a layer of identity control (the doorman) which allows for different degrees of access control to the network.
+\\
+
+In \textbf{Fabric} the movement of chaincode between clients and the network of distributed peer nodes, along with the transacion mechanisms and transfer of receipts that satisfy endorsement policies is the backbone of the coordination of data in the closed system, while the gossip protocol that propagates transactions within private channels allows for the coordination of larger datasets. The architecture was specifically designed to allow multilateral coordination structures. In this setup, data is distributed across clusters to make up a distributed storage platform. Fabric makes use of a ledger-type structure that deviates from the blockchain structure. It is in fact an hash liked data structure, but these data blocks, while transitioning through what are called deliver events, do not necessarily transition data into a modification of the system's state, rather, the information is stored in a database-like structure with different instances of hashes.
+The configuration of the system allows for a transaction throughput that would be expected of the distributed database architecture, but it should be made present that challenges regarding coordination between data and code haven't been completely solved yet.
+\\
+
+
+As a conclusion to this section regarding data coordination, it can be said that Fabric has the edge over the other two platforms thanks to its superior and extensible data coordination toolset. Corda is still defining its capabilities offering coordinating service which are of use specifically to financial institutions, while Ethereum, being designed as a public blockchain, does not have the same raw database processing capabilities as the former two. Forked architecture to Ethereum are designed to close the gap in terms of processing capabilities while allowing the features of a blockchain.
+
+\subsubsection{Trust and data immutability}
+Data immutability has been used as a synonymous concept of trust, that is, \textit{since the system is immutable, it is trusted that tampering will not go unnoticed}. It is though important to asses how a trusted system is implemented, to ensure a safe business model. \\
+
+
+For \textbf{Ethereum}, different layers of trust and immutability have been enstablished in the platform and protocols - in particular for data, within a subprotocol of public blockchain derived state roots from Patricia Merkle Trees. The immutability if the blockchain as a whole is guaranteed because of the number of miners keeping track of the blockchain's ledger. Altering data in a client's ledger will result into a mismatched version between that node and every other node in the network, thus resulting in the tampered node to be ignored by the whole network.
+Ethereum and its enterprise forks are hence able to fully substantiate immutability.\\
+
+For \textbf{Fabric}, in order to guarantee that no party in the channel has tampared data in its favor, a sophisticated endorsement policy has been put into place. It is necessary for the client which issues a new transaction to get endorsement from all interested parties, thus ensuring that everyone have a consistent state. It must be understood that the architecture itself, utilizing Apache Kafka for its channel communication protocol, has inherent read/write access to data, so the immutability aspects are somewhat limited to architectural choices.\\
+
+For \textbf{Corda}, the aspect of immutability is preserved differently withing the confines of the system. The trust is in fact enstablished due to the architecture of the system through, the combined acts of the identity verification and regulatory nodes action. Data entries - called states - cannot be modified, but only consumed.\\
+
+Each platform is able to guarantee immutability and trust to various degrees. The edge is given to Ethereum, for which the whole platform is able to guarantee different layers of trust and immutability to the data. Fabric and Corda are somewhat limited to their approach to guarantee immutability and trust due to their architectures, but nevertheless are able to secure data.
+
+
+
+\section{Project adoption considerations}
+
+In order to have a robust enough platform that can manage transaction in an easy and secure way, the system must be able to satisfy business requirements for efficient processing of data, trust and immutability of the information.
+It is apparante that each platforms can achieve the same goal, to various degrees.
+
 Cost-resource considerations have been made in regards to which technology adopt for the project, and Corda has been chosen as the technology to use for the development of the prototype for this project work. 
 This is due to its simpler architectural design, which would require a definitely shorter amount of resources - time, developers - to understand compared to its competitors, and to the focus on financial use cases, which the underlying project this project work takes place in is set up.
+The issues of scalability, privacy and efficiency have also been taken in consideration, thus ruling out a public, permissionless environment. 
 
-The issues of scalability and privacy have also been taken in consideration, thus ruling out a public, permissionless environment.

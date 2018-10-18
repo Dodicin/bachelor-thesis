@@ -230,7 +230,15 @@ A note has to be said in regards of the second solution here shown. The entire i
 
 \section{Implementation}
 
-Full implementation of the prototype hasn't been completed yet. A test application implementing the basic communication between nodes and exchange of a generic "Payment" state has been implemented in Kotlin using the IntelliJ IDEA environment. The test application regards only the CorDapp subsystem, and allows a seller node and a buyer node to agree on a payment, if it follows the following contract rules: 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.6]{project-structure.png}
+    \caption{
+       Structure of the Corda implementation
+        }
+\end{figure}
+
+A test application implementing the basic communication between nodes and exchange of a "Payment" state has been implemented in Kotlin using the IntelliJ IDEA environment. The test application regards only the CorDapp subsystem, and allows a seller node and a buyer node to agree on a payment, if it follows the following contract rules: 
 
 \begin{itemize}
     \item The payment's value is strictly positive
@@ -238,81 +246,74 @@ Full implementation of the prototype hasn't been completed yet. A test applicati
 \end{itemize}
 
 The CorDapp can be deployed as three nodes, Buyer, Seller, and Notary.
-The Corda Kotlin template has been used for the development of this test application, hence a domain diagram of the implementation won't be supplied, as many details of the lower-level Corda architecture haven't been extensively studied for the scope of this project.
+The Corda Kotlin template has been used for the development of this test application.
 
-This is the structure of the project:
+\newpage
 
-\begin{tiny}
-    \begin{verbatim}
-        .
-        ├── config
-        │   ├── dev
-        │   │   └── log4j2.xml
-        │   └── test
-        │       └── log4j2.xml
-        ├── doc
-        │   └── example_flow.plantuml
-        ├── gradle
-        │   └── wrapper
-        │       ├── gradle-wrapper.jar
-        │       └── gradle-wrapper.properties
-        ├── lib
-        │   ├── README.txt
-        │   └── quasar.jar
-        ├── kotlin-source
-        │   ├── build.gradle
-        │   └── src
-        │       └── main
-        │          ├── kotlin
-        │          │   └── com
-        │          │       └── prototype
-        │          │           ├── api
-        │          │           │   └── protoApi.kt
-        │          │           ├── client
-        │          │           │   └── protoClientRPC.kt
-        │          │           ├── contract
-        │          │           │   └── PaymentContract.kt
-        │          │           ├── flow
-        │          │           │   └── protoFlow.kt
-        │          │           ├── model
-        │          │           │   └── Payment.kt
-        │          │           ├── plugin
-        │          │           │   └── protoPlugin.kt
-        │          │           ├── schema
-        │          │           │   └── PaymentSchema.kt
-        │          │           └── state
-        │          │               └── PaymentState.kt
-        │          └── resources
-        │              ├── META-INF
-        │              │   └── services
-        │              │       └── net.corda.webserver.services.WebServerPluginRegistry
-        │              ├── certificates
-        │              │   ├── readme.txt
-        │              │   ├── sslkeystore.jks
-        │              │   └── truststore.jks
-        │              └── protoWeb
-        │                  ├── index.html
-        │                  └── js
-        │                      └── angular-module.js
-        ├── .gitignore
-        ├── LICENCE
-        ├── README.md
-        ├── TRADEMARK
-        ├── build.gradle
-        ├── gradle.properties
-        ├── gradlew
-        ├── gradlew.bat
-        └── settings.gradle
-    \end{verbatim}
+\subsection{State}
 
-\end{tiny}
+The first class to define is the state class, representing the shared facts on the ledger. The class is immutable, meaning that the values of one instance of the class cannot be modified. Instead, consumed states become historic, and a new state with new values is put into its sequence.
 
-With the key elements being:
-\begin{itemize}
-    \item The \verb|kotlin-source| folder, containing the source code for the CorDapp under \verb|kotlin-source/src/main/kotlin| and some static web content representing the ExChange application under \verb|kotlin-source/src/main/resources|.
-    \item The lib folder, containing the Quasar jar which rewrites the CorDapp flow to make them checkpointable
-\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.8]{project-state.png}
+    \caption{
+       Payment state class
+        }
+\end{figure}
+
+\newpage
+
+\subsection{Contract}
+
+The contract class is used to define how an associated state evolves over time. In Corda, contracts also are able to impose what kind of transactions are to be allowed, so when input and output states do not satisfy a contracts rules, the transaction is considered invalid.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[max size={\textwidth}{\textheight}]{project-contract.png}
+    \caption{
+       Payment contract class
+        }
+\end{figure}
 
 
+\newpage
 
-TODO Snippets of code?
+\subsection{Flow}
+
+The flow class allows to define the steps needed for a Corda node to perform an update on the ledger. In other words, flows allows nodes to issue new PaymentStates to the ledger. Every flow has two sides, the Initiator side, which will initiate the request to update the ledger, and the Acceptor side, which will respond to said request.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[max size={\textwidth}{\textheight}]{project-flow1.png}
+    \caption{
+        Payment flow class
+         }
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[max size={\textwidth}{\textheight}]{project-flow2.png}
+    \caption{
+        Payment flow class
+         }
+\end{figure}
+
+\newpage
+
+\subsection{Interaction}
+The front-end and API haven't been fully implemented (ExChange application), as they are outside the scope of this project. A command line interface has been implemented to interact with the network via command line. It is possible to run the client on the terminal window, with the commands:
+\begin{verbatim}
+  cd project
+  ./gradlew clean deployNodes
+  ./build/nodes/runnodes 
+\end{verbatim}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[]{logo_unimib.pdf}
+    \caption{
+        deployNodes task in the build.gradle file
+         }
+\end{figure}
+
+With that it's possible to verify that the nodes and implemented classes are running correctly.

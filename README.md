@@ -1,6 +1,6 @@
-# Distributed Ledger Technology: analysis and design of a DLT solution for a credits interchange sysstem
+# Distributed Ledger Technology: analysis of the technology and design of prototypical solution
 
-This is the latex project for my Bachelor of CompSci thesis on DLTs and Corda.
+This is the latex project for my Bachelor of Computer Science thesis on DLTs and Corda.
 
 ## How to build
 ```
@@ -15,6 +15,3 @@ This is the latex project for my Bachelor of CompSci thesis on DLTs and Corda.
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
-
-* Thanks to x, y z
